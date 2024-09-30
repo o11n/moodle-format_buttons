@@ -24,8 +24,9 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
+require_once($CFG->dirroot. '/course/format/lib.php');
 
-require_once($CFG->dirroot. '/course/format/topics/lib.php');
+use core\output\inplace_editable;
 
 /**
  * format_buttons
@@ -35,7 +36,7 @@ require_once($CFG->dirroot. '/course/format/topics/lib.php');
  * @copyright  2017 Rodrigo Brandão
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class format_buttons extends format_topics {
+class format_buttons extends core_courseformat\base {
 
     /**
      * course_format_options
