@@ -15,10 +15,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Privacy Subsystem implementation for Topics course format.
+ * Privacy Subsystem implementation for Buttons course format.
  *
- * @package    format_topics
- * @copyright  2018 Carlos Escobedo <carlos@moodle.com>
+ * Adapted from work by Rodrigo Brandão <https://www.linkedin.com/in/brandaorodrigo>
+ * and Ferran Recio <ferran@moodle.com>.
+ *
+ * @package    format_buttons
+ * @author     Dave Scott
+ * @copyright  2024 Dave <dave@blockarts.io>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

@@ -21,8 +21,11 @@
  * be declared as class attributes, not a simple methods. The reason is because many
  * plugins can add extra mutations to the course editor.
  *
+ * Adapted from work by Ferran Recio <ferran@moodle.com>.
+ *
  * @module     format_buttons/mutations
- * @copyright  2022 Ferran Recio <ferran@moodle.com>
+ * @author     Dave Scott
+ * @copyright  2024 Dave <dave@blockarts.io>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

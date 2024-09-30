@@ -30,8 +30,12 @@ use context_course;
 /**
  * Contains the core course state actions specific to buttons format.
  *
+ * Adapted from work by Rodrigo Brandão <https://www.linkedin.com/in/brandaorodrigo>
+ * and Ferran Recio <ferran@moodle.com>.
+ *
  * @package    format_buttons
- * @copyright  2022 Ferran Recio <ferran@moodle.com>
+ * @author     Dave Scott
+ * @copyright  2024 Dave <dave@blockarts.io>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class stateactions extends stateactions_base {

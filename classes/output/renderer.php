@@ -17,9 +17,13 @@
 /**
  * Output renderer for the format_buttons plugin.
  *
- * @package   format_buttons
- * @copyright 2024, Dave <dave@blockarts.io>
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Adapted from work by Rodrigo Brandão <https://www.linkedin.com/in/brandaorodrigo>
+ * and Ferran Recio <ferran@moodle.com>.
+ *
+ * @package    format_buttons
+ * @author     Dave Scott
+ * @copyright  2024 Dave <dave@blockarts.io>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace format_buttons\output;

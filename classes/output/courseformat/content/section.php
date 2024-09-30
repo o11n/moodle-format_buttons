@@ -31,9 +31,13 @@ use stdClass;
 /**
  * Base class to render a course section.
  *
- * @package   format_buttons
- * @copyright 2020 Ferran Recio <ferran@moodle.com>
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Adapted from work by Rodrigo Brandão <https://www.linkedin.com/in/brandaorodrigo>
+ * and Ferran Recio <ferran@moodle.com>.
+ *
+ * @package    format_buttons
+ * @author     Dave Scott
+ * @copyright  2024 Dave <dave@blockarts.io>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class section extends section_base {
 

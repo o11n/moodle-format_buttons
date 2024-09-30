@@ -16,8 +16,11 @@
 /**
  * Format buttons section extra logic component.
  *
+ * Adapted from work by Ferran Recio <ferran@moodle.com>.
+ *
  * @module     format_buttons/section
- * @copyright  2022 Ferran Recio <ferran@moodle.com>
+ * @author     Dave Scott
+ * @copyright  2024 Dave <dave@blockarts.io>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
