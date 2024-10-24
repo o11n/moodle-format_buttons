@@ -1,0 +1,74 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+
+{{! example
+<div class="right side">
+    <img class="icon spacer" width="1" height="1" alt="" aria-hidden="true" src="https://rehearse.training.jw.org/theme/image.php/lambda/core/1727272098/spacer">
+    <div class="section_action_menu" data-sectionid="17464">
+        <div class="action-menu moodle-actionmenu section-actions" id="action-menu-4" data-enhance="moodle-core-actionmenu">
+            <div class="menubar d-flex " id="action-menu-4-menubar">
+                <div class="action-menu-trigger">
+                    <div class="dropdown">
+                        <a href="#" tabindex="0" class=" dropdown-toggle icon-no-margin" id="action-menu-toggle-4" aria-label="Edit" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" aria-controls="action-menu-4-menu">
+                            " Edit "
+                            <b class="caret"></b>
+                        </a>
+                        <div class="dropdown-menu menu dropdown-menu-right" id="action-menu-4-menu" data-rel="menu-content" aria-labelledby="action-menu-toggle-4" role="menu">
+                            <a href="https://rehearse.training.jw.org/course/editsection.php?id=17464&amp;sr=0" class="dropdown-item edit menu-action" role="menuitem" tabindex="-1">
+                                <img class="icon " alt="" aria-hidden="true" src="https://rehearse.training.jw.org/theme/image.php/lambda/core/1727272098/i/settings">
+                                <span class="menu-action-text">Edit topic</span>
+                            </a>
+                            <a href="https://rehearse.training.jw.org/course/view.php?id=1836&amp;sesskey=zGLML5xxti&amp;marker=2" class="dropdown-item editing_highlight menu-action" data-action="sectionHighlight" data-id="17464" data-swapname="Remove highlight" data-swapicon="i/marked" role="menuitem" tabindex="-1">
+                                <img class="icon " alt="" aria-hidden="true" src="https://rehearse.training.jw.org/theme/image.php/lambda/core/1727272098/i/marker">
+                                <span class="menu-action-text">Highlight</span>
+                            </a>
+                            <a href="https://rehearse.training.jw.org/course/view.php?id=1836&amp;sesskey=zGLML5xxti&amp;section=2&amp;duplicatesection=2#section-0" class="dropdown-item duplicate menu-action" role="menuitem" tabindex="-1">
+                                <img class="icon " alt="" aria-hidden="true" src="https://rehearse.training.jw.org/theme/image.php/lambda/core/1727272098/t/copy">
+                                <span class="menu-action-text">Duplicate</span>
+                            </a>
+                                                            <a href="https://rehearse.training.jw.org/course/view.php?id=1836&amp;sesskey=zGLML5xxti&amp;hide=2#section-0" class="dropdown-item editing_showhide menu-action" data-sectionreturn="0" data-action="sectionHide" data-id="17464" data-swapname="Show topic" data-swapicon="i/show" role="menuitem" tabindex="-1">
+                                <img class="icon " alt="" aria-hidden="true" src="https://rehearse.training.jw.org/theme/image.php/lambda/core/1727272098/i/hide">
+                                <span class="menu-action-text">Hide topic</span>
+                            </a>
+                            <a href="https://rehearse.training.jw.org/course/view.php?id=1836&amp;sesskey=zGLML5xxti&amp;movesection=2&amp;section=2#section-0" class="dropdown-item move waitstate menu-action" data-action="moveSection" data-id="17464" role="menuitem" tabindex="-1">
+                                <img class="icon " alt="" aria-hidden="true" src="https://rehearse.training.jw.org/theme/image.php/lambda/core/1727272098/i/dragdrop">
+                                <span class="menu-action-text">Move</span>
+                            </a>
+                            <a href="https://rehearse.training.jw.org/course/view.php?id=1836&amp;sesskey=zGLML5xxti&amp;section=2&amp;move=-1#section-0" class="dropdown-item moveup whilenostate menu-action" role="menuitem" tabindex="-1">
+                                <img class="icon " alt="" aria-hidden="true" src="https://rehearse.training.jw.org/theme/image.php/lambda/core/1727272098/i/up">
+                                <span class="menu-action-text">Move up</span>
+                            </a>
+                            <a href="https://rehearse.training.jw.org/course/view.php?id=1836&amp;sesskey=zGLML5xxti&amp;section=2&amp;move=1#section-0" class="dropdown-item movedown whilenostate menu-action" role="menuitem" tabindex="-1">
+                                <img class="icon " alt="" aria-hidden="true" src="https://rehearse.training.jw.org/theme/image.php/lambda/core/1727272098/i/down">
+                                <span class="menu-action-text">Move down</span>
+                            </a>
+                            <a href="https://rehearse.training.jw.org/course/editsection.php?id=17464&amp;sr=0&amp;delete=1&amp;sesskey=zGLML5xxti" class="dropdown-item editing_delete menu-action" data-action="deleteSection" data-id="17464" role="menuitem" tabindex="-1">
+                                <img class="icon " alt="" aria-hidden="true" src="https://rehearse.training.jw.org/theme/image.php/lambda/core/1727272098/i/delete">
+                                <span class="menu-action-text">Delete topic</span>
+                            </a>
+                            <a href="https://rehearse.training.jw.org/course/view.php?id=1836#sectionid-17464-title" class="dropdown-item menu-action" data-action="permalink" role="menuitem" tabindex="-1">
+                                <img class="icon " alt="" aria-hidden="true" src="https://rehearse.training.jw.org/theme/image.php/lambda/core/1727272098/i/link">
+                                <span class="menu-action-text">Permalink</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}}

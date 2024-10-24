@@ -15,18 +15,35 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * format_buttons_renderer
+ * Contains the controlmenu output class.
  *
  * @package    format_buttons
- * @author     Rodrigo Brandão <https://www.linkedin.com/in/brandaorodrigo>
- * @copyright  2020 Rodrigo Brandão <rodrigo.brandao.contato@gmail.com>
+ * @author     Dave Scott
+ * @copyright  2024 Dave <dave@blockarts.io>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+namespace format_buttons\output\courseformat\content\section;
 
-$plugin->requires = 2022041900.00; /* moodle 4.0.0 */
-$plugin->component = 'format_buttons';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '4.x';
-$plugin->version = 2024102400;
+use core_courseformat\base as course_format;
+use core_courseformat\output\local\content\section\controlmenu as controlmenu_base;
+use stdClass;
+use moodle_url;
+ 
+/**
+ * Base class to render a course content.
+ */
+class controlmenu extends controlmenu_base {
+
+    public function export_for_template(\renderer_base $output): stdClass {
+
+        $format = $this->format;
+        $section = $this->section;
+        $course = $format->get_course();
+        mtrace('CTRL-'.$section->section);
+
+        $data = parent::export_for_template($output);
+
+        return $data;
+    }
+}
