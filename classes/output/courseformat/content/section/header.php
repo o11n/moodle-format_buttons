@@ -1,0 +1,53 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Contains the default header output class.
+ *
+ * @package    format_buttons
+ * @author     Dave Scott
+ * @copyright  2024 Dave <dave@blockarts.io>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+namespace format_buttons\output\courseformat\content\section;
+
+use core_courseformat\base as course_format;
+use core_courseformat\output\local\content\section\header as header_base;
+use stdClass;
+ 
+/**
+ * Base class to render a course content.
+ */
+class header extends header_base {
+
+    /** @var course_format the course format */
+    protected $format;
+
+    /** @var section_info the course section class */
+    protected $section;
+
+    public function export_for_template(\renderer_base $output): stdClass {
+
+        $format = $this->format;
+        $section = $this->section;
+        $course = $format->get_course();
+
+        $data = parent::export_for_template($output);
+
+        return $data;
+    }
+}

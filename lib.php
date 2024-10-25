@@ -15,11 +15,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * format_buttons_renderer
+ * format_buttons plugin
  *
  * @package    format_buttons
  * @author     Rodrigo Brandão <https://www.linkedin.com/in/brandaorodrigo>
+ * @author     Dave Scott
  * @copyright  2020 Rodrigo Brandão <rodrigo.brandao.contato@gmail.com>
+ * @copyright  2024 Dave <dave@blockarts.io>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -366,6 +368,81 @@ class format_buttons extends format_topics {
 
         return $url;
     }
+
+    /**
+     * get_color_config
+     *
+     * @param stdclass $course
+     * @param string $name
+     * @return string
+     */
+    public function get_color_config($course, $name) {
+        $return = false;
+        if (isset($course->{$name})) {
+            $color = str_replace('#', '', $course->{$name});
+            $color = substr($color, 0, 6);
+            if (preg_match('/^#?[a-f0-9]{6}$/i', $color)) {
+                $return = '#'.$color;
+            }
+        }
+        return $return;
+    }
+
+    /**
+     * Number_to_roman
+     *
+     * @param integer $number
+     * @return string
+     */
+    public function number_to_roman($number) {
+        $number = intval($number);
+        $return = '';
+        $romanarray = [
+            'M' => 1000,
+            'CM' => 900,
+            'D' => 500,
+            'CD' => 400,
+            'C' => 100,
+            'XC' => 90,
+            'L' => 50,
+            'XL' => 40,
+            'X' => 10,
+            'IX' => 9,
+            'V' => 5,
+            'IV' => 4,
+            'I' => 1
+        ];
+        foreach ($romanarray as $roman => $value) {
+            $matches = intval($number / $value);
+            $return .= str_repeat($roman, $matches);
+            $number = $number % $value;
+        }
+        return $return;
+    }
+
+    /**
+     * Number_to_alphabet
+     *
+     * @param integer $number
+     * @return string
+     */
+    public function number_to_alphabet($number) {
+        $number = $number - 1;
+        $alphabet = range("A", "Z");
+        if ($number <= 25) {
+            return $alphabet[$number];
+        } else if ($number > 25) {
+            $dividend = ($number + 1);
+            $alpha = '';
+            while ($dividend > 0) {
+                $modulo = ($dividend - 1) % 26;
+                $alpha = $alphabet[$modulo] . $alpha;
+                $dividend = floor((($dividend - $modulo) / 26));
+            }
+            return $alpha;
+        }
+    }
+
 }
 
 /**
