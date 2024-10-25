@@ -15,11 +15,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * format_buttons_renderer
+ * Establishes the buttons format called by Moodle.
  *
  * @package    format_buttons
  * @author     Rodrigo Brandão <https://www.linkedin.com/in/brandaorodrigo>
+ * @author     Dave Scott
  * @copyright  2020 Rodrigo Brandão <rodrigo.brandao.contato@gmail.com>
+ * @copyright  2024 Dave <dave@blockarts.io>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -53,14 +55,9 @@ $renderer = $format->get_renderer($PAGE);
 
 // Setup the format base instance.
 if (!empty($displaysection)) {
-    // $renderer->print_single_section_page($course, null, null, null, null, $displaysection);
-    $renderer->print_multiple_section_page($course, null, null, null, null);
-    $format->set_section_number($displaysection);
+    $format->set_sectionnum($displaysection);
 }
 
-// $renderer->print_single_section_page($course, null, null, null, null, $displaysection);
-// $renderer->print_multiple_section_page($course, null, null, null, null);
-// $format->set_section_number($displaysection);
 // Output course content.
 $outputclass = $format->get_output_classname('content');
 // mtrace('CLS '.$outputclass);

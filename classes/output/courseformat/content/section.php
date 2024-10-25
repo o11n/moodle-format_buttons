@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Contains the default content output class.
+ * Contains the default section output class.
  *
  * @package    format_buttons
  * @author     Dave Scott
@@ -28,10 +28,7 @@ namespace format_buttons\output\courseformat\content;
 use core_courseformat\base as course_format;
 use core_courseformat\output\local\content\section as section_base;
 use stdClass;
-use moodle_page;
 use moodle_url;
-use renderer;
-use renderer_base;
 
 /**
  * Base class to render a course content.
@@ -52,15 +49,15 @@ class section extends section_base {
         $section = $this->section;
         $course = $format->get_course();
 
-        // $edit = '';
-        // if ($PAGE->user_is_editing()) {
-        //     $edit = '-edit';
-        // }
-        // mtrace('SEC-'.$section->section.$edit);
-
         $data = parent::export_for_template($widget);
         
         // echo "<pre>"; var_dump($data); echo "</pre>";
+
+        if ($PAGE->user_is_editing()) {
+            $data->editinline = $widget->section_title_without_link($section, $course);
+        } else {
+            $data->editinline = $widget->section_title($section, $course);
+        }
 
         if (!$this->format->get_sectionnum()) {
             $addsectionclass = $format->get_output_classname('content\\addsection');

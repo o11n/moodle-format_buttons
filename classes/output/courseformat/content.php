@@ -29,7 +29,7 @@ require_once($CFG->dirroot.'/course/format/topics/classes/output/renderer.php');
 
 use core_courseformat\output\local\content as content_base;
 use renderer_base;
-use completion_info;
+use moodle_url;
 
 /**
  * Base class to render a course content.
@@ -57,10 +57,7 @@ class content extends content_base {
         $data = parent::export_for_template($widget);
         
         $data->pageTitle = $widget->page_title();
-        $data->hasAbove = true;
-
-        // Title with completion help icon.
-        $completioninfo = new completion_info($course);
+        $data->above = true;
 
         // buttons format - ini
         if (isset($_COOKIE['sectionvisible_' . $course->id])) {
@@ -93,13 +90,8 @@ class content extends content_base {
 
         // var_dump($data->sections[0]);
         $sections = $data->sections;
-        $buttoncount = 0;
         // how many buttons do we need?
-        foreach ($sections as $section) {
-//            if ($section->uservisible) {
-                $buttoncount++;
-//            }
-        }
+        $buttoncount = sizeof($sections) - 1;
 
         if ($buttoncount > 0) {
             $b = 1;
@@ -170,119 +162,37 @@ class content extends content_base {
         $data->section0 = $data->sections[0];
         $data->numberedsections = array_slice($sections, 1);
 
+        $strediting = get_string('editing', 'format_buttons');
+        $straddsection = get_string('increasesections', 'moodle');
+        $strremovesection = get_string('reducesections', 'moodle');
+        $plusurl = $widget->pix_icon('t/switch_plus', $straddsection);
+        $minusurl = $widget->pix_icon('t/switch_minus', $strremovesection);
+
+        $increaseurl = new moodle_url('/course/changenumsections.php', ['courseid' => $course->id,
+            'increase' => true, 'sesskey' => sesskey()]);
+        $decreaseurl = new moodle_url('/course/changenumsections.php', ['courseid' => $course->id,
+            'increase' => false, 'sesskey' => sesskey()]);
+
+        if ($buttoncount > 0) {
+            $data->decrease = true;
+        }
+        $data->increaseurl = $increaseurl;
+        $data->decreaseurl = $decreaseurl;
+        $data->plusurl = $plusurl;
+        $data->minusurl = $minusurl;
+        $data->straddsection = $straddsection;
+        $data->strremovesection = $strremovesection;
+
         if (!$PAGE->user_is_editing()) {
             $PAGE->requires->js_init_call('M.format_buttons.init', [$course->numsections, $sectionvisible, $course->id]);
+        } else {
+            $data->editing = true;
+            $data->strediting = $strediting;
         }
         // Button format - end
 
         $PAGE->requires->js_call_amd('format_buttons/mutations', 'init');
         $PAGE->requires->js_call_amd('format_buttons/section', 'init');
         return $data;
-    }
-
-    public function print_multiple_section_page($course, $sections, $mods, $modnames, $modnamesused) {
-        global $PAGE;
-
-        $modinfo = get_fast_modinfo($course);
-        $course = course_get_format($course)->get_course();
-
-        $context = context_course::instance($course->id);
-        // Title with completion help icon.
-        $completioninfo = new completion_info($course);
-
-        // buttons format - ini
-        if (isset($_COOKIE['sectionvisible_' . $course->id])) {
-            $sectionvisible = $_COOKIE['sectionvisible_' . $course->id];
-        } else if ($course->marker > 0) {
-            $sectionvisible = $course->marker;
-        } else {
-            $sectionvisible = 1;
-        }
-        $htmlsection = false;
-        foreach ($modinfo->get_section_info_all() as $section => $thissection) {
-            $htmlsection[$section] = '';
-            if ($section == 0) {
-                $section0 = $thissection;
-                continue;
-            }
-            if ($section > $course->numsections) {
-                continue;
-            }
-            /* If is not editing verify the rules to display the sections */
-            if (!$PAGE->user_is_editing()) {
-                if ($course->hiddensections && !(int)$thissection->visible) {
-                    continue;
-                }
-                if (!$thissection->available && !empty($thissection->availableinfo)) {
-                    $htmlsection[$section] .= $this->section_header($thissection, $course, false, 0);
-                    continue;
-                }
-                if (!$thissection->uservisible || !$thissection->visible) {
-                    $htmlsection[$section] .= $this->section_hidden($section, $course->id);
-                    continue;
-                }
-            }
-            $htmlsection[$section] .= $this->section_header($thissection, $course, false, 0);
-            if ($thissection->uservisible) {
-                $htmlsection[$section] .= $this->courserenderer->course_section_cm_list($course, $thissection, 0);
-                $htmlsection[$section] .= $this->courserenderer->course_section_add_cm_control($course, $section, 0);
-            }
-            $htmlsection[$section] .= $this->section_footer();
-        }
-        if ($section0->summary || !empty($modinfo->sections[0]) || $PAGE->user_is_editing()) {
-            $htmlsection0 = $this->section_header($section0, $course, false, 0);
-            $htmlsection0 .= $this->courserenderer->course_section_cm_list($course, $section0, 0);
-            $htmlsection0 .= $this->courserenderer->course_section_add_cm_control($course, 0, 0);
-            $htmlsection0 .= $this->section_footer();
-        }
-        echo $completioninfo->display_help_icon();
-        echo $this->output->heading($this->page_title(), 2, 'accesshide');
-        echo $this->course_activity_clipboard($course, 0);
-        echo $this->start_section_list();
-        if ($course->sectionposition == 0 and isset($htmlsection0)) {
-            echo html_writer::tag('span', $htmlsection0, ['class' => 'above']);
-        }
-        echo $this->get_button_section($course, $sectionvisible);
-        foreach ($htmlsection as $current) {
-            echo $current;
-        }
-        if ($course->sectionposition == 1 and isset($htmlsection0)) {
-            echo html_writer::tag('span', $htmlsection0, ['class' => 'below']);
-        }
-        if ($PAGE->user_is_editing() and has_capability('moodle/course:update', $context)) {
-            foreach ($modinfo->get_section_info_all() as $section => $thissection) {
-                if ($section <= $course->numsections or empty($modinfo->sections[$section])) {
-                    continue;
-                }
-                echo $this->stealth_section_header($section);
-                echo $this->courserenderer->course_section_cm_list($course, $thissection, 0);
-                echo $this->stealth_section_footer();
-            }
-            echo $this->end_section_list();
-            echo html_writer::start_tag('div', ['id' => 'changenumsections', 'class' => 'mdl-right']);
-            $straddsection = get_string('increasesections', 'moodle');
-            $url = new moodle_url('/course/changenumsections.php', ['courseid' => $course->id,
-                'increase' => true, 'sesskey' => sesskey()]);
-            $icon = $this->output->pix_icon('t/switch_plus', $straddsection);
-            echo html_writer::link($url, $icon.get_accesshide($straddsection), ['class' => 'increase-sections']);
-            if ($course->numsections > 0) {
-                $strremovesection = get_string('reducesections', 'moodle');
-                $url = new moodle_url('/course/changenumsections.php', ['courseid' => $course->id,
-                    'increase' => false, 'sesskey' => sesskey()]);
-                $icon = $this->output->pix_icon('t/switch_minus', $strremovesection);
-                echo html_writer::link(
-                    $url,
-                    $icon.get_accesshide($strremovesection),
-                    ['class' => 'reduce-sections']
-                );
-            }
-            echo html_writer::end_tag('div');
-        } else {
-            echo $this->end_section_list();
-        }
-        if (!$PAGE->user_is_editing()) {
-            $PAGE->requires->js_init_call('M.format_buttons.init', [$course->numsections, $sectionvisible, $course->id]);
-        }
-        // Button format - end
     }
 }

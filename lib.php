@@ -15,11 +15,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * format_buttons_renderer
+ * format_buttons plugin
  *
  * @package    format_buttons
  * @author     Rodrigo Brandão <https://www.linkedin.com/in/brandaorodrigo>
+ * @author     Dave Scott
  * @copyright  2020 Rodrigo Brandão <rodrigo.brandao.contato@gmail.com>
+ * @copyright  2024 Dave <dave@blockarts.io>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -367,8 +369,8 @@ class format_buttons extends format_topics {
         return $url;
     }
 
-        /**
-     * Get_button_section
+    /**
+     * get_color_config
      *
      * @param stdclass $course
      * @param string $name

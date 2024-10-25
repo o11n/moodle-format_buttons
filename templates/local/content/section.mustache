@@ -14,79 +14,6 @@
     You should have received a copy of the GNU General Public License
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
-{{!
-    @template core_courseformat/local/content/section
-
-    Displays a course section.
-
-    Note: This template is a wrapper around the section/content template to allow course formats and theme designers to
-    modify parts of the wrapper without having to copy/paste the entire template.
-
-    Example context (json):
-    {
-        "num": 3,
-        "id": 35,
-        "sectionname": "Section title",
-        "controlmenu": "[tools menu]",
-        "header": {
-            "name": "Section title",
-            "title": "<a href=\"http://moodle/course/view.php?id=5#section-0\">Section title</a>",
-            "url": "#",
-            "ishidden": true
-        },
-        "cmlist": {
-            "cms": [
-                {
-                    "cmitem": {
-                        "cmformat": {
-                            "cmname": "<a class=\"aalink\" href=\"#\"><span class=\"instancename\">Forum example</span></a>",
-                            "hasname": "true"
-                        },
-                        "id": 3,
-                        "module": "forum",
-                        "anchor": "activity-3",
-                        "extraclasses": "newmessages"
-                    }
-                },
-                {
-                    "cmitem": {
-                        "cmformat": {
-                            "cmname": "<a class=\"aalink\" href=\"#\"><span class=\"instancename\">Assign example</span></a>",
-                            "hasname": "true"
-                        },
-                        "id": 4,
-                        "anchor": "activity-4",
-                        "module": "assign",
-                        "extraclasses": ""
-                    }
-                }
-            ],
-            "hascms": true
-        },
-        "ishidden": false,
-        "iscurrent": true,
-        "currentlink": "<span class=\"accesshide\">This topic</span>",
-        "availability": {
-            "info": "<span class=\"badge bg-info\">Hidden from students</span>",
-            "hasavailability": true
-        },
-        "summary": {
-            "summarytext": "Summary text!"
-        },
-        "controlmenu": {
-            "menu": "<a href=\"#\" class=\"d-inline-block dropdown-toggle icon-no-margin\">Edit<b class=\"caret\"></b></a>",
-            "hasmenu": true
-        },
-        "cmcontrols": "[Add an activity or resource]",
-        "iscoursedisplaymultipage": true,
-        "sectionreturnnum": 0,
-        "contentcollapsed": false,
-        "insertafter": true,
-        "numsections": 42,
-        "sitehome": false,
-        "highlightedlabel" : "Highlighted"
-    }
-}}
 
 <li id="section-{{num}}"
     class="section main clearfix{{style}}{{#isstealth}} orphaned{{/isstealth}}"
@@ -100,15 +27,13 @@
     {{!controlmenu}}
     <div class="right side">
         {{#controlmenu}}
-            {{> format_buttons/local/content/section/controlmenu }}
+            {{> core_courseformat/local/content/section/controlmenu }}
         {{/controlmenu}}
     </div>
     {{!section-content}}
     <div class="content">
         <h3 class="sectionname{{#hide}} accesshide{{/hide}}">
-            <span>
-                <a href="{{sectionurl}}">{{{sectionname}}}</a>
-            </span>
+            {{{editinline}}}
         </h3>
         {{!availability}}
         <div class="section_availability">
@@ -122,7 +47,6 @@
                 {{> core_courseformat/local/content/section/summary }}
             {{/summary}}
         </div>
-{{!section img-text???? is this an addsection?}}
         <div class="section img-text">
             {{#cmlist}}
                 {{> core_courseformat/local/content/section/cmlist }}

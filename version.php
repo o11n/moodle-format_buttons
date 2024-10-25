@@ -29,4 +29,4 @@ $plugin->requires = 2022041900.00; /* moodle 4.0.0 */
 $plugin->component = 'format_buttons';
 $plugin->maturity = MATURITY_STABLE;
 $plugin->release = '4.x';
-$plugin->version = 2024102400;
+$plugin->version = 2024102401;

@@ -19,7 +19,9 @@
  *
  * @package    format_buttons
  * @author     Rodrigo Brandão <https://www.linkedin.com/in/brandaorodrigo>
+ * @author     Dave Scott
  * @copyright  2020 Rodrigo Brandão <rodrigo.brandao.contato@gmail.com>
+ * @copyright  2024 Dave <dave@blockarts.io>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,16 +29,10 @@ namespace format_buttons\output;
 
 defined('MOODLE_INTERNAL') || die();
 
-// require_once($CFG->dirroot.'/course/format/topics/classes/output/renderer.php');
 
 use core_courseformat\output\section_renderer;
-use \format_buttons\output\courseformat\content;
-use \format_buttons\output\courseformat\content\section;
-use \format_buttons\output\courseformat\content\section\header;
-use renderer_base;
 use moodle_page;
 use renderable;
-use html_writer;
 
 /**
  * Format_buttons_renderer
