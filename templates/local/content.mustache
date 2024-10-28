@@ -24,37 +24,30 @@
                 {{> format_buttons/local/content/section }}
             {{/section0}}
         </span>
-        {{#buttonstyle}}
-            <style>{{buttonstyle}}</style>
-        {{/buttonstyle}}
-        <div id="buttonsectioncontainer" class="{{shape}}" style="display: table;">
-            {{#buttonsections}}
-                {{> format_buttons/local/content/buttons }}
-            {{/buttonsections}}
-        </div>
-        {{#editing}}
-            <div class="alert alert-warning alert-block fade in">{{strediting}}</div>
-        {{/editing}}
     {{/above}}
     
+    {{#buttonstyle}}
+        <style>{{buttonstyle}}</style>
+    {{/buttonstyle}}
+    <div id="buttonsectioncontainer" class="{{shape}}" style="display: table;">
+        {{#buttonsections}}
+            {{> format_buttons/local/content/buttons }}
+        {{/buttonsections}}
+    </div>
+
+    {{#editing}}
+        <div class="alert alert-warning alert-block fade in">{{strediting}}</div>
+    {{/editing}}
+
     {{#numberedsections}}
         {{> format_buttons/local/content/section }}
     {{/numberedsections}}
 
-    {{!sections}}
-    
     {{^above}}
-        <style>{{buttonstyle}}</style>
-        <div id="buttonsectioncontainer" class="{{shape}}" style="display: table;">
-            {{#buttonsections}}
-                {{> format_buttons/local/content/buttons }}
-            {{/buttonsections}}
-        </div>
-        {{#editing}}
-            <div class="alert alert-warning alert-block fade in">{{strediting}}</div>
-        {{/editing}}
         <span class="below">
-            {{sectionzero}}
+            {{#section0}}
+                {{> format_buttons/local/content/section }}
+            {{/section0}}
         </span>
     {{/above}}
 </ul>
