@@ -56,8 +56,12 @@ class content extends content_base {
 
         $data = parent::export_for_template($widget);
         
+        // set the page title and whether the buttons are above or below
         $data->pageTitle = $widget->page_title();
         $data->above = true;
+        if ($course->sectionposition == 1) {
+            $data->above = false;
+        }
 
         // buttons format - ini
         if (isset($_COOKIE['sectionvisible_' . $course->id])) {
@@ -84,6 +88,7 @@ class content extends content_base {
             }
             ';
         }
+        // set the style of the buttons
         $data->buttonstyle = $css;
         $data->shape = $course->buttonstyle;
         $data->buttonsections = array();
@@ -107,6 +112,7 @@ class content extends content_base {
                     continue;
                 }
 
+                // create a new button
                 $div = new \stdClass;
 
                 $text = format_string($course->{'divisortext' . $b});
@@ -153,21 +159,23 @@ class content extends content_base {
                 $div->id = $section->num;
                 $div->index = $b;
                 $div->courseid = $course->id;
+                // add this button to the page
                 array_push($data->buttonsections, $div);
                 $b++;
             }
         }
         // end button creation
 
+        // section 0 and sections 1..n will be rendered
         $data->section0 = $data->sections[0];
         $data->numberedsections = array_slice($sections, 1);
 
+        // begin footer buttons for adding/reducing number of sections (edit mode only)
         $strediting = get_string('editing', 'format_buttons');
         $straddsection = get_string('increasesections', 'moodle');
         $strremovesection = get_string('reducesections', 'moodle');
         $plusurl = $widget->pix_icon('t/switch_plus', $straddsection);
         $minusurl = $widget->pix_icon('t/switch_minus', $strremovesection);
-
         $increaseurl = new moodle_url('/course/changenumsections.php', ['courseid' => $course->id,
             'increase' => true, 'sesskey' => sesskey()]);
         $decreaseurl = new moodle_url('/course/changenumsections.php', ['courseid' => $course->id,
@@ -182,6 +190,7 @@ class content extends content_base {
         $data->minusurl = $minusurl;
         $data->straddsection = $straddsection;
         $data->strremovesection = $strremovesection;
+        // end footer buttons
 
         if (!$PAGE->user_is_editing()) {
             $PAGE->requires->js_init_call('M.format_buttons.init', [$course->numsections, $sectionvisible, $course->id]);
